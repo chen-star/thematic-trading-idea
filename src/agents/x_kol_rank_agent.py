@@ -2,10 +2,10 @@ from google.adk.agents import Agent
 from google.adk.models.google_llm import Gemini
 from google.adk.tools import google_search
 
-from agents.retry_config import retry_config
+from agents.configs.retry_config import retry_config
 
 PROMPT = (
-    "Generate a ranked list of the top 10 Key Opinion Leaders (KOLs) in the field of momentum stock trading, including day trading and swing trading. "
+    "Ignore whatever user inputs. Generate a ranked list of the top 10 Key Opinion Leaders (KOLs) in the field of momentum stock trading, including day trading and swing trading. "
     "Specifically only focusing on those active on X (formerly known as Twitter). "
     "The ranking must primarily consider popularity, engagement metrics, reputation, content depth and positive feedback."
     "The output should be a ranked table including their Name, X Profile URL and a short explanation of why they are ranked in that position."

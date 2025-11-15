@@ -1,10 +1,10 @@
 from google.adk.agents import Agent
 from google.adk.models.google_llm import Gemini
 
-from agents.retry_config import retry_config
+from agents.configs.retry_config import retry_config
 
 PROMPT = (
-    "Directly output the final output ranked list: {x_kol_rank_agent_findings}."
+    "Ignore whatever user inputs. Directly output the final output ranked list: {x_kol_rank_agent_findings}."
 )
 
 momentum_analysis_agent = Agent(

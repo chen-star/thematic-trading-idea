@@ -54,7 +54,8 @@ async def main():
     agent_query = thematic_topic_query(get_user_thematic_topic_input())
 
     try:  # run_debug() requires ADK Python 1.18 or higher:
-        response = await runner.run_debug(agent_query)
+        # response = await runner.run_debug(agent_query)
+        runner.run_live()
 
     except Exception as e:
         print(f"An error occurred during agent execution: {e}")

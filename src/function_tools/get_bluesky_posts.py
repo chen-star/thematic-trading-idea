@@ -21,18 +21,18 @@ Notes:
   in financial communities on Bluesky.
 """
 
-# import os
+import os
 from typing import List, Dict, Any
 
 from atproto import Client
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 
-# load_dotenv()
-#
-# # --- Configuration ---
-# # To get an App Password, go to Bluesky > Settings > Privacy & Security > App Passwords.
-# BLUESKY_USERNAME: str | None = os.getenv("BLUESKY_USERNAME")
-# BLUESKY_APP_PASSWORD: str | None = os.getenv("BLUESKY_APP_PASSWORD")
+load_dotenv()
+
+# --- Configuration ---
+# To get an App Password, go to Bluesky > Settings > Privacy & Security > App Passwords.
+BLUESKY_USERNAME: str | None = os.getenv("BLUESKY_USERNAME")
+BLUESKY_APP_PASSWORD: str | None = os.getenv("BLUESKY_APP_PASSWORD")
 
 
 def get_bluesky_posts(symbol: str, limit: int = 10) -> List[Dict[str, Any]]:

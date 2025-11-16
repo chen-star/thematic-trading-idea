@@ -4,7 +4,7 @@ from google.adk.models.google_llm import Gemini
 from agents.configs.retry_config import retry_config
 
 PROMPT = (
-    "Ignore whatever user inputs. Directly output the final output ranked list: {ticker_scanner_findings}."
+    "Ignore whatever user inputs. Directly output the final output ranked list: {structured_ticker_scanner_findings}."
 )
 
 momentum_analysis_agent = Agent(

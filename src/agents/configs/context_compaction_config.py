@@ -1,5 +1,5 @@
 """
-Context Compaction config uses a sliding window approach for collecting and summarizing agent workflow
+Context Compaction configs uses a sliding window approach for collecting and summarizing agent workflow
 event data within a Session.
 """
 

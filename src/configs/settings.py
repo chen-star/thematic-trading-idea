@@ -1,4 +1,4 @@
-# src/config/settings.py
+# src/configs/settings.py
 from dataclasses import dataclass
 from typing import Optional
 import os

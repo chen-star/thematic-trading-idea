@@ -1,3 +1,5 @@
-google-adk
-pytest
+google.adk
+protobuf
 python-dotenv
+pyfiglet
+termcolor

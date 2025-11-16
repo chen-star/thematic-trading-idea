@@ -1,5 +1,6 @@
 import asyncio
 import sys
+import logging
 
 from dotenv import load_dotenv
 from google.adk.runners import InMemoryRunner
@@ -8,7 +9,16 @@ from termcolor import colored
 from agents.agent import app
 from src.utils.cli_utils import print_centered_title, print_centered, center_text
 
-load_dotenv()  # load API keys and settings
+# For debugging purposes
+# Comment out for production
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(levelname)s - %(name)s - %(message)s'
+)
+
+# load API keys and settings
+load_dotenv()
+
 # Set a Runner using the imported application object
 runner = InMemoryRunner(app=app)
 

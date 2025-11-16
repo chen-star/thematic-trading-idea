@@ -3,3 +3,4 @@ protobuf
 python-dotenv
 pyfiglet
 termcolor
+atproto

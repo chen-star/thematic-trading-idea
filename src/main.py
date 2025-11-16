@@ -13,7 +13,7 @@ load_dotenv()  # load API keys and settings
 runner = InMemoryRunner(app=app)
 
 
-def print_cli_title():
+def print_cli_title() -> None:
     # Top Border (Bright White)
     print_centered(colored("#" * 60, 'white', attrs=['bold']))
 
@@ -31,31 +31,53 @@ def print_cli_title():
     print_centered(colored("#" * 60, 'white', attrs=['bold']))
 
 
-def get_user_thematic_topic_input():
-    print("\n\n")
-    input_prompt = center_text(
-        "🚀 Enter the thematic investment topic you are interested(e.g., 'AI Datacenter', 'Uranium Mining', etc.): ")
-    thematic_topic = input(colored(input_prompt, 'white', 'on_blue', attrs=['bold']))
-    print("\n")
+def get_user_thematic_topic_input() -> str | None:
+    # Loop until valid input is received
+    while True:
+        try:
+            print("\n")
+            print(colored(center_text(
+                "🚀 Enter the thematic investment topic (e.g., 'AI Datacenter', 'Uranium Mining', etc.)"
+            ), 'cyan', attrs=['bold']))
+            thematic_topic = input(colored(">>> ", 'green', attrs=['bold']))
 
-    if not thematic_topic.strip():
-        print_centered(colored("😿 Sorry. Topic cannot be empty. Exiting.", 'white', 'on_red', attrs=['bold']))
-        sys.exit(0)
+            if not thematic_topic.strip():
+                print_centered(
+                    colored("😿 Sorry. Topic cannot be empty. Please try again.", 'white', 'on_red', attrs=['bold']))
+                continue
 
-    return thematic_topic.strip()
+            print("\n")
+            return thematic_topic.strip()
+
+        except KeyboardInterrupt:
+            print_centered(colored("\n\n😿 Input cancelled by user. Exiting.", 'white', 'on_red', attrs=['bold']))
+            sys.exit(0)
 
 
-def thematic_topic_query(thematic_topic):
+def thematic_topic_query(thematic_topic: str) -> str:
     return f"The thematic topic is: '{thematic_topic}'. Please execute the task as defined in your system instructions."
+
+
+def print_waiting_analysis(thematic_topic: str) -> None:
+    print_centered(colored(f"Analyzing topic: '{thematic_topic}'...", 'magenta', attrs=['bold']))
+    print_centered(colored("⏳ Please wait while the Agent team runs its analysis...", 'yellow'))
 
 
 async def main():
     print_cli_title()
 
-    agent_query = thematic_topic_query(get_user_thematic_topic_input())
+    thematic_topic = get_user_thematic_topic_input()
+    agent_query = thematic_topic_query(thematic_topic)
+
+    if not thematic_topic:
+        sys.exit(0)
+
+    # Restored the call to the waiting agents' response
+    print_waiting_analysis(thematic_topic)
 
     try:  # run_debug() requires ADK Python 1.18 or higher:
         response = await runner.run_debug(agent_query)
+        print_centered(colored(f"--- AGENT ANALYSIS COMPLETE for '{thematic_topic}' ---", 'green', attrs=['bold']))
 
     except Exception as e:
         print(f"An error occurred during agent execution: {e}")

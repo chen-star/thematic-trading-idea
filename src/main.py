@@ -4,9 +4,9 @@ import sys
 from dotenv import load_dotenv
 from google.adk.runners import InMemoryRunner
 from termcolor import colored
-from cli_utils import print_centered_title, print_centered, center_text
 
 from agents.agent import app
+from src.utils.cli_utils import print_centered_title, print_centered, center_text
 
 load_dotenv()  # load API keys and settings
 # Set a Runner using the imported application object
@@ -33,7 +33,8 @@ def print_cli_title():
 
 def get_user_thematic_topic_input():
     print("\n\n")
-    input_prompt = center_text("🚀 Enter the thematic investment topic you are interested(e.g., 'AI Datacenter', 'Uranium Mining', etc.): ")
+    input_prompt = center_text(
+        "🚀 Enter the thematic investment topic you are interested(e.g., 'AI Datacenter', 'Uranium Mining', etc.): ")
     thematic_topic = input(colored(input_prompt, 'white', 'on_blue', attrs=['bold']))
     print("\n")
 
@@ -54,8 +55,7 @@ async def main():
     agent_query = thematic_topic_query(get_user_thematic_topic_input())
 
     try:  # run_debug() requires ADK Python 1.18 or higher:
-        # response = await runner.run_debug(agent_query)
-        runner.run_live()
+        response = await runner.run_debug(agent_query)
 
     except Exception as e:
         print(f"An error occurred during agent execution: {e}")

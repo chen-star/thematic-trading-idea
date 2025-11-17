@@ -66,7 +66,7 @@ def get_bluesky_posts(symbol: str, limit: int = 10) -> List[Dict[str, Any]]:
         return []
 
     # 1. Initialize and authenticate
-    print(f"Connecting to Bluesky as {BLUESKY_USERNAME}...")
+    # print(f"Connecting to Bluesky as {BLUESKY_USERNAME}...")
     try:
         client = Client()
         client.login(BLUESKY_USERNAME, BLUESKY_APP_PASSWORD)
@@ -83,7 +83,7 @@ def get_bluesky_posts(symbol: str, limit: int = 10) -> List[Dict[str, Any]]:
         response = client.app.bsky.feed.search_posts(
             params={
                 "q": search_query,
-                "sort": "latest",
+                "sort": "top",
                 "lang": "en",
                 "limit": limit,
             },

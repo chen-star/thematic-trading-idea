@@ -1,9 +1,8 @@
 from agents.configs.retry_config import retry_config
+from agents.data_models.ticker_scanner_agent_data_model import ScannerAgentListOutput
 from google.adk.agents import Agent, SequentialAgent
 from google.adk.models.google_llm import Gemini
 from google.adk.tools import google_search
-
-from agents.data_models.ticker_scanner_agent_data_model import ScannerAgentListOutput
 
 model = Gemini(
     model="gemini-2.5-flash-lite",
@@ -47,7 +46,6 @@ raw_ticker_scanner_agent = Agent(
 )
 
 print("✅ Raw Ticker Scanner Agent created.")
-
 
 # -----  STRUCTURED TICKER SCANNER AGENT -----
 STRUCTURED_PROMPT = (
@@ -107,7 +105,6 @@ structured_ticker_scanner_agent = Agent(
 )
 
 print("✅ Structured Ticker Scanner Agent created.")
-
 
 # -----  FULL TICKER SCANNER AGENT -----
 root_ticker_scanner_agent = SequentialAgent(

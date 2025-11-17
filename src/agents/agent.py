@@ -1,6 +1,6 @@
 from agents.analysts_team.social_media_sentiment_analyst import root_social_media_sentiment_agent
+from agents.analysts_team.institution_rating_analyst import root_institution_rating_agent
 from agents.configs.context_compaction_config import context_compaction_config
-from agents.momentum_analysis_agent import momentum_analysis_agent
 from agents.plugin.count_model_call_plugin import CountModelCallPlugin
 from agents.ticker_scanner_agent import root_ticker_scanner_agent
 from google.adk.agents import SequentialAgent
@@ -18,7 +18,11 @@ from google.adk.apps import App
 
 root_agent = SequentialAgent(
     name="RootAgent",
-    sub_agents=[root_ticker_scanner_agent, root_social_media_sentiment_agent],
+    sub_agents=[
+        root_ticker_scanner_agent,
+        # root_social_media_sentiment_agent,
+        root_institution_rating_agent,
+    ],
 )
 
 app = App(

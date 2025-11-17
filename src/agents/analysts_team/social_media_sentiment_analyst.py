@@ -108,12 +108,12 @@ STRUCTURED_PROMPT = (
     Output: a list of sentiment results in the following JSON format:
     ```json
     {
-      "social_media_sentiments": [
+      "institution_ratings": [
         {
           "symbol": "GOOG",
           "company_name": "Alphabet Inc.",
           "aggregated_sentiment": "bullish",
-          "justification": "Sentiment is highly divided; bullish posts cited new government contracts",
+          "justification": "Sentiment calculated as 'bullish' because Total Buy (15) was compared to Total Sell (0).",
         }
         // ... complete with 4 more tickers
       ]
@@ -128,7 +128,7 @@ structured_social_media_sentiment_agent = Agent(
     description="Enforce JSON format for social media sentiment analysis result.",
     instruction=STRUCTURED_PROMPT,
     output_schema=SocialMediaSentimentOutput,
-    output_key="structured_social_media_sentiment_agent",
+    output_key="structured_social_media_sentiment_findings",
 )
 
 print("✅ Structured Social Media Sentiment Agent created.")

@@ -4,3 +4,4 @@ python-dotenv
 pyfiglet
 termcolor
 atproto
+finnhub-python

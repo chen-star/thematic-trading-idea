@@ -5,3 +5,6 @@ pyfiglet
 termcolor
 atproto
 finnhub-python
+pandas
+ta
+yfinance

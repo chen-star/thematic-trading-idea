@@ -10,7 +10,7 @@ from google.adk.apps.app import EventsCompactionConfig
 warnings.filterwarnings(
     action="ignore",
     message=".*Experimental.*",
-    category=UserWarning  # <-- CORRECTED CATEGORY
+    category=UserWarning
 )
 
 context_compaction_config: EventsCompactionConfig = EventsCompactionConfig(

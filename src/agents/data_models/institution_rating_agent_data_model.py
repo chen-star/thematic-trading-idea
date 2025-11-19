@@ -3,6 +3,7 @@ from typing import List
 from agents.data_models.sentiment import Sentiment
 from pydantic import BaseModel, Field
 
+
 class InstitutionRating(BaseModel):
     symbol: str = Field(description="The official ticker symbol of the stock (e.g., 'GOOGL', 'AAPL').")
     company_name: str = Field(description="The full legal name of the company corresponding to the ticker symbol.")

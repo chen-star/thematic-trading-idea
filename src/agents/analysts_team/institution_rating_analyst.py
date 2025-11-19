@@ -108,7 +108,7 @@ STRUCTURED_PROMPT = (
     Output: a list of sentiment results in the following JSON format:
     ```json
     {
-      "social_media_sentiments": [
+      "institution_ratings": [
         {
           "symbol": "GOOG",
           "company_name": "Alphabet Inc.",

@@ -135,7 +135,7 @@ structured_institution_rating_agent = Agent(
 print("✅ Structured Ticker Scanner Agent created.")
 
 
-# -----  FULL TICKER SCANNER AGENT -----
+# -----  FULL AGENT -----
 root_institution_rating_agent = SequentialAgent(
     name="root_institution_rating_agent",
     sub_agents=[raw_institution_rating_agent, structured_institution_rating_agent],

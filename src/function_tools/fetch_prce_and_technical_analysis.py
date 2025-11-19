@@ -1,8 +1,10 @@
 from src.function_tools.calculate_technical_indicators import generate_aggregated_signal
 from src.function_tools.fetch_yahoo_finance_stock_price import fetch_historical_close_prices
 
+from typing import Dict, Any, List
 
-def fetch_price_and_technical_analysis(symbols: list) -> list:
+
+def fetch_price_and_technical_analysis(symbols: List[str]) -> List[Dict[str, Any]]:
     """
     Fetch historical price data and generate technical analysis signals for multiple symbols.
     Args:

@@ -7,7 +7,7 @@ from google.adk.models.google_llm import Gemini
 
 from function_tools.get_bluesky_posts import get_bluesky_posts
 
-model = Gemini(model="gemini-2.5-flash", retry_options=retry_config)
+model = Gemini(model="gemini-2.5-flash-lite", retry_options=retry_config)
 
 PROMPT = """
 ## 1. Agent Role and Task

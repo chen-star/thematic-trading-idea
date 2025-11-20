@@ -1,3 +1,4 @@
+import sys
 from agents.configs.retry_config import retry_config
 from google.adk.agents import Agent
 from google.adk.models.google_llm import Gemini
@@ -10,12 +11,11 @@ model = Gemini(model="gemini-2.5-flash-lite", retry_options=retry_config)
 email_mcp_connection = MCPToolset(
     connection_params=StdioConnectionParams(
         server_params=StdioServerParameters(
-            command="python",
-            args=["src/mcp_server/email_server.py"],
+            command="fastmcp",
+            args=["run", "src/mcp_server/email_server.py"],
         ),
+        timeout=240,
     ),
-    # Optional: Filter which tools from the MCP server are exposed
-    # tool_filter=['list_directory', 'read_file']
 )
 
 PROMPT = f"""

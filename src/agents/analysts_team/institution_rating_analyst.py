@@ -2,17 +2,18 @@ from agents.configs.retry_config import retry_config
 from google.adk.agents import Agent, SequentialAgent
 from google.adk.models.google_llm import Gemini
 
-from agents.data_models.institution_rating_agent_data_model import InstitutionRatingOutput
-
-from function_tools.get_and_analyze_institution_rating import run_analysis_for_multiple_tickers
-
-model = Gemini(
-    model="gemini-2.5-flash-lite",
-    retry_options=retry_config
+from agents.data_models.institution_rating_agent_data_model import (
+    InstitutionRatingOutput,
 )
 
-# -----  RAW AGENT -----
-RAW_PROMPT = """
+from function_tools.get_and_analyze_institution_rating import (
+    run_analysis_for_multiple_tickers,
+)
+
+model = Gemini(model="gemini-2.5-flash-lite", retry_options=retry_config)
+
+
+PROMPT = """
     **Role:** Financial Data Processor and Sentiment Aggregator.
     
     **Objective:** The agent's sole purpose is to process raw JSON data from a financial screening source, extract all relevant stock symbols, and use the provided `run_analysis_for_multiple_tickers` function tool to generate a detailed sentiment analysis report.
@@ -80,66 +81,14 @@ RAW_PROMPT = """
     * The final response must be the JSON output and nothing else.
 """
 
-raw_institution_rating_agent = Agent(
-    name="raw_institution_rating_agent",
+root_institution_rating_agent = Agent(
+    name="root_institution_rating_agent",
     model=model,
-    instruction=RAW_PROMPT,
+    instruction=PROMPT,
     tools=[run_analysis_for_multiple_tickers],
-    output_key="raw_institution_rating_findings",
+    output_key="structured_institution_rating_findings",
     # The result of this agent will be stored in the session state with this key.
 )
 
-print("✅ Raw Institution Rating Agent created.")
 
-
-# -----  STRUCTURED TICKER SCANNER AGENT -----
-STRUCTURED_PROMPT = (
-    """Role: You are a highly reliable **JSON Structure Enforcement Agent**. 
-    Your sole function is to take the raw, perhaps unstructured or semi-structured text output from another agent and reformat it into a single, clean, and strictly valid JSON object."""
-    """Task: Read the provided ticker findings: {raw_institution_rating_findings}. Respond ONLY with a JSON object matching this exact schema."""
-    """
-    Requirements:
-    1.  Your output **MUST** be a single, raw JSON object.
-    2.  **DO NOT** include any text, explanations, greetings, warnings, or code fences (e.g., ```json) in your response.
-    3.  The final JSON object **MUST** be parsable and conform exactly to the schema below.
-    """
-    """
-    Input: a list of sentiment analysis results provided in the {raw_institution_rating_findings}.
-    Output: a list of sentiment results in the following JSON format:
-    ```json
-    {
-      "institution_ratings": [
-        {
-          "symbol": "GOOG",
-          "company_name": "Alphabet Inc.",
-          "aggregated_sentiment": "bullish",
-          "justification": "Sentiment is highly divided; bullish posts cited new government contracts",
-        }
-        // ... complete with 4 more tickers
-      ]
-    }
-    ```
-    """
-)
-
-
-structured_institution_rating_agent = Agent(
-    model=model,
-    name="structured_institution_rating_agent",
-    description="Enforce JSON format for institution rating analysis result.",
-    instruction=STRUCTURED_PROMPT,
-    output_schema=InstitutionRatingOutput,
-    output_key="structured_institution_rating_findings",
-)
-
-print("✅ Structured Ticker Scanner Agent created.")
-
-
-# -----  FULL AGENT -----
-root_institution_rating_agent = SequentialAgent(
-    name="root_institution_rating_agent",
-    sub_agents=[raw_institution_rating_agent, structured_institution_rating_agent],
-)
-
-
-print("✅ Root Ticker Scanner Agent created.")
+print("✅ Institution Rating Agent created.")

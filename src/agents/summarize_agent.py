@@ -2,12 +2,7 @@ from agents.configs.retry_config import retry_config
 from google.adk.agents import Agent
 from google.adk.models.google_llm import Gemini
 
-model = Gemini(
-    model="gemini-2.5-flash-lite",
-    retry_options=retry_config
-)
-
-# 2.  **Technical Analysis:** {structured_technical_analyst_findings}
+model = Gemini(model="gemini-2.5-flash-lite", retry_options=retry_config)
 
 PROMPT = """
 # ROLE
@@ -17,6 +12,7 @@ Act as a Senior Equity Research Analyst writing a daily briefing. Your tone shou
 You will receive three sets of analysis findings in JSON/structured format:
 1.  **Social Sentiment:** {structured_social_media_sentiment_findings}
 2.  **Institutional Ratings:** {structured_institution_rating_findings}
+3.  **Technical Analysis:** {structured_technical_analyst_findings}
 
 # TASK
 Synthesize these findings into a cohesive email summary. Do not just list the data; connect the dots. For example, if technicals are bullish but sentiment is negative, highlight this divergence as a risk factor.
@@ -44,10 +40,7 @@ Produce *only* the HTML code for the email body.
 
 summarizer_agent = Agent(
     name="SummarizerAgent",
-    model=Gemini(
-        model="gemini-2.5-flash-lite",
-        retry_options=retry_config
-    ),
+    model=model,
     instruction=PROMPT,
     output_key="final_summary",
 )

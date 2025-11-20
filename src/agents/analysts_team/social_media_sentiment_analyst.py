@@ -1,17 +1,15 @@
 from agents.configs.retry_config import retry_config
-from agents.data_models.social_media_sentiment_agent_data_model import SocialMediaSentimentOutput
+from agents.data_models.social_media_sentiment_agent_data_model import (
+    SocialMediaSentimentOutput,
+)
 from google.adk.agents import Agent, SequentialAgent
 from google.adk.models.google_llm import Gemini
 
 from function_tools.get_bluesky_posts import get_bluesky_posts
 
-model = Gemini(
-    model="gemini-2.5-flash",
-    retry_options=retry_config
-)
+model = Gemini(model="gemini-2.5-flash", retry_options=retry_config)
 
-# -----  RAW AGENT -----
-RAW_PROMPT = """
+PROMPT = """
 ## 1. Agent Role and Task
 
 You are a **Social Media Sentiment Analyzer Agent**. Your task is to process a list of target stock symbols, retrieve related social data using the provided tool, and then **analyze and aggregate the sentiment** of the relevant posts for each ticker.
@@ -81,62 +79,14 @@ Your final response **MUST** ONLY be a single, raw JSON object containing the ag
 ```
 """
 
-raw_social_media_sentiment_analyst_agent = Agent(
-    name="raw_social_media_sentiment_analyst_agent",
+root_social_media_sentiment_analyst_agent = Agent(
+    name="root_social_media_sentiment_analyst_agent",
     model=model,
-    instruction=RAW_PROMPT,
+    instruction=PROMPT,
     tools=[get_bluesky_posts],
-    output_key="raw_social_media_sentiment_findings",
+    output_key="structured_social_media_sentiment_findings",
     # The result of this agent will be stored in the session state with this key.
 )
 
-print("✅ Raw Social Media Sentiment Analyst Agent created.")
 
-# -----  STRUCTURED AGENT -----
-STRUCTURED_PROMPT = (
-    """Role: You are a highly reliable **JSON Structure Enforcement Agent**. 
-    Your sole function is to take the raw, perhaps unstructured or semi-structured text output from another agent and reformat it into a single, clean, and strictly valid JSON object."""
-    """Task: Read the provided findings: {raw_social_media_sentiment_findings}. Respond ONLY with a JSON object matching this exact schema."""
-    """
-    Requirements:
-    1.  Your output **MUST** be a single, raw JSON object.
-    2.  **DO NOT** include any text, explanations, greetings, warnings, or code fences (e.g., ```json) in your response.
-    3.  The final JSON object **MUST** be parsable and conform exactly to the schema below.
-    """
-    """
-    Input: a list of sentiment analysis results provided in the {raw_social_media_sentiment_findings}.
-    Output: a list of sentiment results in the following JSON format:
-    ```json
-    {
-      "institution_ratings": [
-        {
-          "symbol": "GOOG",
-          "company_name": "Alphabet Inc.",
-          "aggregated_sentiment": "bullish",
-          "justification": "Sentiment calculated as 'bullish' because Total Buy (15) was compared to Total Sell (0).",
-        }
-        // ... complete with 4 more tickers
-      ]
-    }
-    ```
-    """
-)
-
-structured_social_media_sentiment_agent = Agent(
-    model=model,
-    name="structured_social_media_sentiment_agent",
-    description="Enforce JSON format for social media sentiment analysis result.",
-    instruction=STRUCTURED_PROMPT,
-    output_schema=SocialMediaSentimentOutput,
-    output_key="structured_social_media_sentiment_findings",
-)
-
-print("✅ Structured Social Media Sentiment Agent created.")
-
-# -----  FULL AGENT -----
-root_social_media_sentiment_agent = SequentialAgent(
-    name="social_media_sentiment_agent",
-    sub_agents=[raw_social_media_sentiment_analyst_agent, structured_social_media_sentiment_agent],
-)
-
-print("✅ Root Social Media Sentiment Analyst Agent created.")
+print("✅ Social Media Sentiment Analyst Agent created.")

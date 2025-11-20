@@ -7,7 +7,7 @@ from google.adk.runners import InMemoryRunner
 from termcolor import colored
 
 from agents.agent import app
-from src.utils.cli_utils import print_centered_title, print_centered, center_text
+from utils.cli_utils import print_centered_title, print_centered, center_text
 
 # For debugging purposes
 # Comment out for production
@@ -87,7 +87,7 @@ async def main():
 
     try:  # run_debug() requires ADK Python 1.18 or higher:
         response = await runner.run_debug(agent_query)
-        print_centered(colored(f"--- AGENT ANALYSIS COMPLETE for '{thematic_topic}' ---", 'green', attrs=['bold']))
+        print_centered(colored(f"--- AGENT ANALYSIS COMPLETE for the thematic topic '{thematic_topic}' ---", 'green', attrs=['bold']))
 
     except Exception as e:
         print(f"An error occurred during agent execution: {e}")

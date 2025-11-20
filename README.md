@@ -1,10 +1,8 @@
-# Hello World Google ADK Agent
+# Thematic Trading Idea Agent
 
-## Setup
-pip install -e .
+## Activate environment and install dependencies
+source .venv/bin/activate
+pip install -r requirements.txt
 
 ## Run
-python -m src.agent_runner
-
-## Test
-pytest
+.venv/bin/python src/main.py

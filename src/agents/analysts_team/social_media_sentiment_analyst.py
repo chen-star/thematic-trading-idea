@@ -3,7 +3,7 @@ from agents.data_models.social_media_sentiment_agent_data_model import SocialMed
 from google.adk.agents import Agent, SequentialAgent
 from google.adk.models.google_llm import Gemini
 
-from src.function_tools.get_bluesky_posts import get_bluesky_posts
+from function_tools.get_bluesky_posts import get_bluesky_posts
 
 model = Gemini(
     model="gemini-2.5-flash",

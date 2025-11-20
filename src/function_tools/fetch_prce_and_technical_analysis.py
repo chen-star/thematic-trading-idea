@@ -1,5 +1,5 @@
-from src.function_tools.calculate_technical_indicators import generate_aggregated_signal
-from src.function_tools.fetch_yahoo_finance_stock_price import fetch_historical_close_prices
+from function_tools.calculate_technical_indicators import generate_aggregated_signal
+from function_tools.fetch_yahoo_finance_stock_price import fetch_historical_close_prices
 
 from typing import Dict, Any, List
 

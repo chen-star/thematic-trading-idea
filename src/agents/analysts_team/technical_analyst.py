@@ -4,7 +4,7 @@ from google.adk.models.google_llm import Gemini
 
 from agents.data_models.technical_agent_data_model import TechnicalSentimentOutput
 
-from src.function_tools.fetch_prce_and_technical_analysis import fetch_price_and_technical_analysis
+from function_tools.fetch_prce_and_technical_analysis import fetch_price_and_technical_analysis
 
 model = Gemini(
     model="gemini-2.5-flash-lite",

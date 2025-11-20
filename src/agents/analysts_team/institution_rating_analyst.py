@@ -4,7 +4,7 @@ from google.adk.models.google_llm import Gemini
 
 from agents.data_models.institution_rating_agent_data_model import InstitutionRatingOutput
 
-from src.function_tools.get_and_analyze_institution_rating import run_analysis_for_multiple_tickers
+from function_tools.get_and_analyze_institution_rating import run_analysis_for_multiple_tickers
 
 model = Gemini(
     model="gemini-2.5-flash-lite",

@@ -9,7 +9,7 @@ An advanced AI-powered multi-agent system designed to discover, analyze, and rep
 
 ## 🏗️ Architecture
 
-![Architecture Diagram](architecture_diagram.png)
+![Architecture Diagram](assets/architecture_diagram.png)
 
 ## 🌟 Overview
 
@@ -120,6 +120,28 @@ fastmcp dev src/mcp_server/email_server.py
 *   This will open a web interface (usually at `localhost:5173`).
 *   Select the `send_email` tool.
 *   Fill in the arguments (to, subject, body) and click **Run** to test email delivery.
+
+
+## ☁️ Deployment
+
+For detailed instructions on how to deploy this application to Google Cloud Platform (Cloud Run), please refer to the [Deployment Guide](deployment/DEPLOYMENT.md).
+
+## 📸 Screenshots
+
+### Local Execution
+
+*The application deployed on Google Cloud Run.*
+
+![Local App Running](assets/local_1.png)
+
+![Local App Running](assets/local_2.png)
+
+![Local App Running](assets/email_generated.jpeg)
+
+
+### Cloud Deployment
+![Cloud App Running](assets/gcp_run.png)
+
 
 ## 📂 Project Structure
 

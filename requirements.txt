@@ -1,11 +1,13 @@
-google.adk
-protobuf
-python-dotenv
-pyfiglet
-termcolor
-atproto
-finnhub-python
-pandas
-ta
-yfinance
-fastmcp
+google.adk          # Google Agent Development Kit for building agents
+protobuf            # Data serialization mechanism
+python-dotenv       # Load environment variables from .env files
+pyfiglet            # ASCII art generator for CLI titles
+termcolor           # Terminal text coloring
+atproto             # Bluesky social network API client
+finnhub-python      # Finnhub API client for stock market data
+pandas              # Data manipulation and analysis library
+ta                  # Technical Analysis library for financial indicators
+yfinance            # Yahoo Finance market data downloader
+fastmcp             # MCP server implementation
+streamlit           # Web framework for creating the UI
+watchdog            # File system monitoring (required for Streamlit auto-reload)

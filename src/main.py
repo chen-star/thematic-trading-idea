@@ -56,7 +56,7 @@ def get_user_thematic_topic_input() -> str | None:
             print(
                 colored(
                     center_text(
-                        "🚀 Enter the thematic investment topic (e.g., 'AI Datacenter', 'Uranium Mining', etc.)"
+                        "🚀 Enter the thematic investment topic (e.g., 'Mega 7', 'AI Application', 'Robotics', etc.)"
                     ),
                     "cyan",
                     attrs=["bold"],

@@ -126,6 +126,7 @@ fastmcp dev src/mcp_server/email_server.py
 
 For detailed instructions on how to deploy this application to Google Cloud Platform (Cloud Run), please refer to the [Deployment Guide](deployment/DEPLOYMENT.md).
 
+
 ## 📸 Screenshots
 
 ### Local Execution
@@ -184,6 +185,27 @@ For detailed instructions on how to deploy this application to Google Cloud Plat
     │   └── cli_utils.py    # CLI formatting and utilities
     └── main.py             # Application entry point
 ```
+
+## 🧪 Evaluation
+
+The project includes an evaluation framework to assess the quality of the generated trading ideas using an **LLM-as-a-Judge** approach.
+
+### Running the Evaluation
+
+To run the evaluation script, which generates reports for a set of test topics and scores them:
+
+```bash
+.venv/bin/python -m evaluation.run_eval
+```
+
+This will:
+1.  Run the agent on predefined topics (e.g., "Mega 7", "Renewable Energy Storage").
+2.  Use a separate LLM (gemini-1.5-flash) to evaluate the generated report based on **Relevance**, **Completeness**, **Actionability**, and **Coherence**.
+   * *Relevance* measures how well the report aligns with the thematic topic.
+   * *Completeness* assesses the required information (technical analysis, institutional ratings, social media sentiment) is included.
+   * *Actionability* evaluates the practicality of the recommendations. (Bulish or Bearish)
+   * *Coherence* measures the overall quality and consistency of the report.
+3.  Output a score (1-10) and detailed reasoning for each topic.
 
 
 ## 🤝 Contributing
